@@ -73,17 +73,24 @@ class _HomeViewState extends HomeViewModel with HomeModel {
             ),
             Visibility(
                 visible: widget.user?.hobbies?.isNotEmpty ?? false,
-                child: SizedBox(
-                  height: deviceHeight / 2,
-                  child: ListView.builder(
-                      itemCount: widget.user?.hobbies?.length,
-                      itemBuilder: ((context, index) {
-                        return InfoCard(
-                          text: widget.user?.hobbies?[index],
-                          color: Colors.amber,
-                          size: size,
-                        );
-                      })),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: SizedBox(
+                    height: deviceHeight / 2,
+                    child: ListView.builder(
+                        itemCount: widget.user?.hobbies?.length,
+                        itemBuilder: ((context, index) {
+                          return InfoCard(
+                            text: widget.user?.hobbies?[index],
+                            color: Colors.amber,
+                            size: size,
+                            onTap: () {
+                              deleteHobbies(index);
+                            },
+                            isDelete: true,
+                          );
+                        })),
+                  ),
                 )),
             Visibility(visible: widget.user?.hobbies?.isEmpty ?? true, child: Text(addHoby)),
           ],

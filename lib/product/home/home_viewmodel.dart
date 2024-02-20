@@ -21,6 +21,14 @@ abstract class HomeViewModel extends BaseState<HomeView> {
     });
   }
 
+  void deleteHobbies(int index) async {
+    setState(() {
+      widget.user?.hobbies?.removeAt(index);
+      FirebaseAuthMethod(FirebaseAuth.instance).updateUserDatas(user: widget.user!, context: context);
+      hobbycontroller.clear();
+    });
+  }
+
   void logout() async {
     await FirebaseAuthMethod(FirebaseAuth.instance).signOut();
   }

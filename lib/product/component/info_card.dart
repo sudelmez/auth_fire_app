@@ -4,7 +4,9 @@ class InfoCard extends StatelessWidget {
   String? text;
   Color? color;
   Size? size;
-  InfoCard({super.key, this.text, this.size, this.color});
+  bool? isDelete;
+  Function()? onTap;
+  InfoCard({super.key, this.text, this.isDelete, this.size, this.color, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,9 @@ class InfoCard extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       width: size?.width,
       decoration: BoxDecoration(color: color ?? Colors.amber, borderRadius: BorderRadius.circular(20), border: Border.all()),
-      child: Center(child: Text(text ?? '')),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text(text ?? ''), isDelete ?? false ? IconButton(onPressed: onTap, icon: const Icon(Icons.delete, color: Colors.cyan)) : const SizedBox()]),
     );
   }
 }
